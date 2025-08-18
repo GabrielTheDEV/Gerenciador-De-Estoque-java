@@ -87,12 +87,13 @@ public abstract class StockService {
     }
 
     public void removeStock(int id, int quantity){
-        String SQL = " ";
+        String SQL = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
         ){
-            ResultSet result = pstmt.executeQuery();
-
+            pstmt.setInt(1, quantity);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
 
         }catch (SQLException err){
             System.out.println("[ERROR] - Falha na saida do produto em estoque - " + err);

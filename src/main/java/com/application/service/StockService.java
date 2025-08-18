@@ -71,11 +71,13 @@ public abstract class StockService {
     }
 
     public void entryStock(int id, int quantity){
-        String SQL = "UPDATE ";
+        String SQL = "UPDATE products SET quantity = quantity + ? WHERE id = ?";
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
         ){
-
+            pstmt.setInt(1, quantity);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
 
         }catch (SQLException err){
             System.out.println("[ERROR] - Falha ao dar entrada no estoque - " + err);
@@ -89,6 +91,8 @@ public abstract class StockService {
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
         ){
+            ResultSet result = pstmt.executeQuery();
+
 
         }catch (SQLException err){
             System.out.println("[ERROR] - Falha na saida do produto em estoque - " + err);
@@ -102,7 +106,7 @@ public abstract class StockService {
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
         ){
-
+            ResultSet result = pstmt.executeQuery();
 
         }catch (SQLException err){
             System.out.println("[ERROR] - Não foi possivel deletar o Produto do estoque - " + err);

@@ -70,7 +70,7 @@ public abstract class StockService {
         }
     }
 
-    public void entryStock(int id, int quantity){
+    public static void entryStock(int id, int quantity){
         String SQL = "UPDATE products SET quantity = quantity + ? WHERE id = ?";
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
@@ -86,7 +86,7 @@ public abstract class StockService {
         }
     }
 
-    public void removeStock(int id, int quantity){
+    public static void removeStock(int id, int quantity){
         String SQL = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)

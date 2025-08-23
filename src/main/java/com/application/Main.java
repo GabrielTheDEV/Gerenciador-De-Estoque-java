@@ -7,6 +7,8 @@ import static com.application.service.StockService.addProduct;
 import static com.application.service.StockService.getInventory;
 import static com.application.service.StockService.entryStock;
 import static com.application.service.StockService.removeStock;
+import static com.application.service.StockService.deleteProduct;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class Main {
 //        addProduct(notebook);
 //        entryStock(2 , 10);
 //        removeStock(3, 5);
-
+//          deleteProduct(3);
         getInventory();
     }
 }

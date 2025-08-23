@@ -102,15 +102,16 @@ public abstract class StockService {
         }
     }
 
-    public void deleteProduct(int id){
-        String SQL = "";
+    public static void deleteProduct(int id){
+        String SQL = "DELETE FROM products WHERE id = ?";
         try(Connection conn = DatabaseConfig.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SQL)
         ){
-            ResultSet result = pstmt.executeQuery();
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
 
         }catch (SQLException err){
-            System.out.println("[ERROR] - Não foi possivel deletar o Produto do estoque - " + err);
+            System.out.println("[ERROR] - Não foi possivel deletar o Produto : " + err);
         }catch (NullPointerException err){
             System.out.println("[ERROR] - Pointer null - " + err);
         }
